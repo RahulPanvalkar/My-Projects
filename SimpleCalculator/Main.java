@@ -87,7 +87,7 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UTILITY);
         stage.show();
     }
-
+    // method to create buttons for numbers
     private Button createButtonForNumber(String ch){
         Button button = new Button(ch);
         button.setPrefSize(35,35);
@@ -96,7 +96,7 @@ public class Main extends Application {
         button.setOnAction(this::processNumbers);
         return button;
     }
-
+    // method to handle event when number is clicked
     private void processNumbers(ActionEvent e){
         if (start){
             textField.setText("");
@@ -110,6 +110,7 @@ public class Main extends Application {
         textField.setText(textField.getText()+value);
     }
 
+    // method to create Buttons for operators
     private Button createButtonForOperator(String ch){
         Button button = new Button(ch);
         button.setFont(Font.font(14));
@@ -119,6 +120,7 @@ public class Main extends Application {
         return button;
     }
 
+    // method to handle event when operator clicked
     private void processOperator(ActionEvent e){
 
         if (textField.getText().isEmpty()){
@@ -146,20 +148,7 @@ public class Main extends Application {
         }
     }
 
-    private double calculate(double num1, double num2, String operator){
-        double result = 0;
-
-        switch (operator){
-            case "+" -> result = num1 + num2;
-            case "-" -> result = num1 - num2;
-            case "*" -> result = num1 * num2;
-            case "%" -> result = num1 % num2;
-            case "/" -> result = num1 / num2;
-            default -> result = 0;
-        }
-        return result;
-    }
-
+    //method for Clear button
     private Button createButtonForClear(String ch){
         Button button = new Button(ch);
         button.setFont(Font.font(14));
@@ -173,6 +162,7 @@ public class Main extends Application {
         return button;
     }
 
+    //method for Delete button
     private Button createButtonForDelete(String ch){
         Button button = new Button(ch);
         button.setFont(Font.font(14));
@@ -187,6 +177,21 @@ public class Main extends Application {
             textField.setText(newText);
         });
         return button;
+    }
+
+    // method to calculate all arithmetic operations
+    private double calculate(double num1, double num2, String operator){
+        double result = 0;
+
+        switch (operator){
+            case "+" -> result = num1 + num2;
+            case "-" -> result = num1 - num2;
+            case "*" -> result = num1 * num2;
+            case "%" -> result = num1 % num2;
+            case "/" -> result = num1 / num2;
+            default -> result = 0;
+        }
+        return result;
     }
 
     public static void main(String[] args) {

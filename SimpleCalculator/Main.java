@@ -127,22 +127,22 @@ public class Main extends Application {
         }
 
         String value = ((Button)e.getSource()).getText();
-        System.out.println(value);
 
-        if (!value.equals("=")){
-            num1 = Double.parseDouble(textField.getText());
-            System.out.println(textField.getText());
-            operator = value;
-            textField.setText(value);
-            System.out.println(value);
-        } else {
-            System.out.println(value);
+        if (value.equals("=")){
             Double num2 = Double.parseDouble(textField.getText());
+            if (num2 == 0 && (operator.equals("/") || operator.equals("%"))){
+                textField.setText("");
+                textField.setPromptText("Divide by zero");
+                return;
+            }
             double result = calculate(num1,num2,operator);
             textField.setText(String.valueOf(result));
             start = true;
-
             operator = "";
+        } else {
+            num1 = Double.parseDouble(textField.getText());
+            operator = value;
+            textField.setText(value);
         }
     }
 
@@ -153,20 +153,8 @@ public class Main extends Application {
             case "+" -> result = num1 + num2;
             case "-" -> result = num1 - num2;
             case "*" -> result = num1 * num2;
-            case "%" -> {
-                if (num2 == 0) {
-                    return 0;
-                }else  {
-                    result = num1 % num2;
-                }
-            }
-            case "/" -> {
-                if (num2 == 0) {
-                    return 0;
-                }else  {
-                    result = num1 / num2;
-                }
-            }
+            case "%" -> result = num1 % num2;
+            case "/" -> result = num1 / num2;
             default -> result = 0;
         }
         return result;

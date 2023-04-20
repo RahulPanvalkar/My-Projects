@@ -78,7 +78,7 @@ public class Main extends Application {
         root.setTop(stackPane);
         root.setCenter(tile);
 
-        root.setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET,CornerRadii.EMPTY,Insets.EMPTY)));
+        root.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,Insets.EMPTY)));
         Scene scene = new Scene(root,200,310);
         stage.setScene(scene);
         stage.setTitle("Calculator");
@@ -92,6 +92,7 @@ public class Main extends Application {
         Button button = new Button(ch);
         button.setPrefSize(35,35);
         button.setFont(Font.font(14));
+        button.setFont(Font.font("bold"));
         button.setTextFill(Color.BLUEVIOLET);
         button.setOnAction(this::processNumbers);
         return button;
@@ -123,7 +124,8 @@ public class Main extends Application {
     // method to handle event when operator clicked
     private void processOperator(ActionEvent e){
 
-        if (textField.getText().isEmpty()){
+        if (textField.getText().isEmpty() || textField.getText().equals("/") || textField.getText().equals("*") ||
+        textField.getText().equals("+") || textField.getText().equals("-") || textField.getText().equals("%")){
             textField.setPromptText("Enter a Number");
             return;
         }
@@ -131,7 +133,7 @@ public class Main extends Application {
         String value = ((Button)e.getSource()).getText();
 
         if (value.equals("=")){
-            Double num2 = Double.parseDouble(textField.getText());
+            double num2 = Double.parseDouble(textField.getText());
             if (num2 == 0 && (operator.equals("/") || operator.equals("%"))){
                 textField.setText("");
                 textField.setPromptText("Divide by zero");

@@ -1,0 +1,21 @@
+.root{
+    -fx-background-image: url("tic-tac-toe.png");
+    -fx-background-position: center center;
+}
+
+#ticTacToeLabel{
+    -fx-text-fill: antiquewhite;
+}
+
+#restartButton{
+        -fx-base: antiquewhite;
+        -fx-text-fill: black;
+        -fx-font-size: 16px;
+        -fx-font-weight: bold;
+        -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
+
+#message {
+            -fx-text-fill: white;
+}
+

@@ -1,4 +1,4 @@
-package com.example.newtictactoe;
+package com.tictactoe;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Controller {
 
@@ -33,35 +35,44 @@ public class Controller {
 
     private char playerTurn = 'X';
     private boolean isEndOfGame = false;
-    ArrayList<Label> labelList;
+    List<Label> labelList;
 
     public void initialize() {
         labelList = new ArrayList<>(Arrays.asList(label1, label2, label3, label4, label5, label6, label7, label8, label9));
-        labelList.forEach(label -> {
-            setupText(label);
-        });
+        labelList.forEach(this::setupText);
     }
-
+    
     @FXML
     void restartGame() {
+        Random random = new Random();
+        int number = random.nextInt(2);
+
         isEndOfGame = false;
         message.setMaxWidth(Double.MAX_VALUE);
         message.setAlignment(Pos.CENTER);
-        playerTurn = 'X';
+
+        if (number == 0) {
+            message.setText("Player X's Turn");
+            playerTurn = 'X';
+        }
+        else {
+            message.setText("Player O's Turn");
+            playerTurn = 'O';
+        }
+
         labelList.forEach(this::resetText);
     }
 
     public void resetText(Label label){
         label.setDisable(false);
         label.setText("");
-        message.setText("Player "+playerTurn+"'s Turn");
+        label.setStyle("-fx-text-fill: white; -fx-background-color: black");
         message.setAlignment(Pos.CENTER);
     }
 
     @FXML
     public void setupText(Label label) {
         label.setOnMouseClicked(mouseEvent -> {
-
             if (label.getText().isEmpty() && !isEndOfGame){
                 label.setText(String.valueOf(playerTurn));
                 setPlayerSymbol(label);
@@ -73,30 +84,54 @@ public class Controller {
 
     public void setPlayerSymbol(Label label){
         if(playerTurn == 'X'){
-            playerTurn = 'O';
             label.setText("X");
+            playerTurn = 'O';
             message.setText("Player O's Turn");
         } else{
-            playerTurn = 'X';
             label.setText("O");
+            playerTurn = 'X';
             message.setText("Player X's Turn");
         }
     }
 
     public void checkIfGameIsOver(){
-        for (int a = 0; a < 8; a++) {
+        for (int a = 1; a <= 8; a++) {
             String line = switch (a) {
-                case 0 -> label1.getText() + label2.getText() + label3.getText();
-                case 1 -> label4.getText() + label5.getText() + label6.getText();
-                case 2 -> label7.getText() + label8.getText() + label9.getText();
+                case 1 -> {
+                    drawWinningLine(label1,label2,label3);
+                    yield label1.getText() + label2.getText() + label3.getText();
+                }
+                case 2 -> {
+                    drawWinningLine(label4, label5, label6);
+                    yield label4.getText() + label5.getText() + label6.getText();
+                }
+                case 3 -> {
+                    drawWinningLine(label7, label8, label9);
+                    yield label7.getText() + label8.getText() + label9.getText();
+                }
 
-                case 3 -> label1.getText() + label5.getText() + label9.getText();
-                case 4 -> label3.getText() + label5.getText() + label7.getText();
-                case 5 -> label1.getText() + label4.getText() + label7.getText();
+                case 4 -> {
+                    drawWinningLine(label1, label5, label9);
+                    yield label1.getText() + label5.getText() + label9.getText();
+                }
+                case 5 -> {
+                    drawWinningLine(label3, label5, label7);
+                    yield label3.getText() + label5.getText() + label7.getText();
+                }
+                case 6 -> {
+                    drawWinningLine(label1, label4, label7);
+                    yield label1.getText() + label4.getText() + label7.getText();
+                }
 
-                case 6 -> label2.getText() + label5.getText() + label8.getText();
+                case 7 -> {
+                    drawWinningLine(label2, label5, label8);
+                    yield label2.getText() + label5.getText() + label8.getText();
+                }
 
-                case 7 -> label3.getText() + label6.getText() + label9.getText();
+                case 8 -> {
+                    drawWinningLine(label3, label6, label9);
+                    yield label3.getText() + label6.getText() + label9.getText();
+                }
                 default -> null;
             };
 
@@ -113,7 +148,6 @@ public class Controller {
                 message.setText("Player O Won!");
                 return;
             }
-          
             // Draw
             else if (!(label1.getText().isEmpty() || label2.getText().isEmpty() || label3.getText().isEmpty() ||
                     label4.getText().isEmpty() || label5.getText().isEmpty() || label6.getText().isEmpty() ||
@@ -122,6 +156,16 @@ public class Controller {
                 isEndOfGame = true;
                 message.setText("Draw!");
             }
+        }
+    }
+    
+    private static void drawWinningLine(Label label1, Label label2, Label label3){
+        if((label1.getText() + label2.getText() + label3.getText()).equals("XXX") ||
+                (label1.getText() + label2.getText() + label3.getText()).equals("OOO")){
+
+            label1.setStyle("-fx-text-fill: black; -fx-background-color: white");
+            label2.setStyle("-fx-text-fill: black; -fx-background-color: white");
+            label3.setStyle("-fx-text-fill: black; -fx-background-color: white");
         }
     }
 }

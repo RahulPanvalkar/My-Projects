@@ -4,18 +4,20 @@
 }
 
 #ticTacToeLabel{
-    -fx-text-fill: antiquewhite;
+    -fx-text-fill: orange;
+    -fx-font-weight: bold;
+    -fx-font-size: 32px;
 }
 
 #restartButton{
-        -fx-base: antiquewhite;
-        -fx-text-fill: black;
+        -fx-background-color: black;
+        -fx-text-fill: orange;
         -fx-font-size: 16px;
         -fx-font-weight: bold;
-        -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
 }
 
 #message {
-            -fx-text-fill: white;
+            -fx-text-fill: antiquewhite;
+            -fx-background-color: black;
 }
 

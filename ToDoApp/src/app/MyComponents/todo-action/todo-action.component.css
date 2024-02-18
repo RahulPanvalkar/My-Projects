@@ -1,0 +1,15 @@
+.done {
+    text-decoration: line-through;
+}
+
+.view-title{
+    min-height: 26px; 
+    max-height: 26px; 
+    overflow: hidden;
+}
+
+.view-desc{
+    min-height: 48px; 
+    max-height: 48px; 
+    overflow: hidden;
+}

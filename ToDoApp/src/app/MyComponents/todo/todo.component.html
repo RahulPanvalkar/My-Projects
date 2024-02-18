@@ -1,0 +1,26 @@
+
+<div *ngIf="addTodoVisible">
+    <app-add-todo [todo]="selectedTodo" [editTodoVisible]="editTodoVisible" [addTodoVisible]="addTodoVisible"
+         (addToDoEventEmitter)="addTodo($event)"></app-add-todo>
+</div> 
+
+<div *ngIf="editTodoVisible">
+    <app-edit-todo [todo]="selectedTodo" [editTodoVisible]="editTodoVisible" [addTodoVisible]="addTodoVisible"
+    (cancelEditEventEmitter)="cancelEdit()" (editToDoEventEmitter)="editTodo($event)" ></app-edit-todo>
+</div>    
+
+<div class="container w-50" *ngIf="todos.length !== 0; else elseBlock">
+    <div>
+        <h3 class="text-center text-decoration-underline">Your To Dos</h3>
+        <div class="row ">
+            <div class="col-md-4 mt-4" *ngFor="let todo of todos; index as i;">
+                <todo-action [todo]="todo" [i]="i" (editEventEmitter)="editTodo($event)"
+                    (deleteEventEmitter)="deleteTodo($event)" (doneEventEmitter)="doneTodo($event)"></todo-action>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <h5 class="text-center pb-2">No todos to display</h5>
+</ng-template>

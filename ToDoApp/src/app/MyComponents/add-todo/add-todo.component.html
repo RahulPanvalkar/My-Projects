@@ -1,0 +1,16 @@
+<div class="my-5 w-50 container-fluid p-5 border rounded">
+  <h3 class="text-center text-decoration-underline">Add To Do</h3>
+  <form (submit)="onAdd()">
+    <div class="form mb-3">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
+    </div>
+    <div class="form">
+      <label for="desc">Description</label>
+      <textarea class="form-control" #descTextarea style="height: 50px; max-height: 210px;" id="desc" name="desc" [(ngModel)]="desc"
+        (input)="adjustTextareaHeight($event)">
+      </textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Add</button>
+  </form>
+</div>

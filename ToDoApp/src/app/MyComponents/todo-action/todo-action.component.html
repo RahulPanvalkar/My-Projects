@@ -1,0 +1,14 @@
+<div class="mb-4">
+
+    <div (click)="onEdit(todo)">
+        <h5 class="view-title" [class.done]="!todo.active" >{{todo.title}}</h5>
+        <p class="view-desc" [class.done]="!todo.active" >{{todo.desc}}</p>
+    </div>
+    <div>
+        <input class="form-check-input" type="checkbox" id="isDone{{i}}" (click)="onDone(todo)" [checked]="!todo.active">
+        <label class="form-check-label" style="margin-left: 5px;" for="isDone{{i}}">Mark as Done</label>
+    </div>
+    
+    <button class="btn btn-sm btn-danger mt-2 " (click)="onDelete(todo)">Delete</button>
+
+</div>  

@@ -1,0 +1,14 @@
+.outerDiv{
+   width: 100vw; 
+   min-height: 100vh;
+   background-color: #262626; 
+   color: antiquewhite;
+}
+
+.todoLabel{
+   color: black;
+   font-size: larger;
+   font-weight: bold;
+   margin-left: 10px;
+}
+
